@@ -1,4 +1,4 @@
-(* leaf_pst - A coupled photosynthesis--stomatal conductance--temperature model
+(* leaf_pst: A coupled photosynthesis--stomatal conductance--temperature model
  * Copyright (c) 2019 Wu Sun <wu.sun@ucla.edu>
  * License: MIT
  *)
