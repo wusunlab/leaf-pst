@@ -1,0 +1,19 @@
+opam-version: "2.0"
+name: "leaf_pst"
+version: "0.1.0"
+synopsis: "A coupled leaf photosynthesis–stomatal conductance–temperature model"
+description: """
+A coupled leaf photosynthesis–stomatal conductance–temperature model
+"""
+maintainer: "Wu Sun <wu.sun@ucla.edu>"
+authors: "Wu Sun <wu.sun@ucla.edu>"
+license: "MIT"
+homepage: ""
+bug-reports: ""
+dev-repo: ""
+depends: [
+  "ocaml" {>= "4.06"}
+  "dune" {build & >= "1.5.0"}
+  "ocamlfind"
+]
+build: ["dune" "build" "-p" name]
