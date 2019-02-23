@@ -1,6 +1,6 @@
 # Coupled Leaf Photosynthesis--Stomatal Conductance--Temperature (PST) Solver
 
-Wu Sun (wu.sun@ucla.edu)
+Wu Sun (wusun@protonmail.com)
 
 This repository contains a leaf model to simulate photosynthesis, stomatal
 conductance, and leaf temperature under given meteorological conditions.

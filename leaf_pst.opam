@@ -5,8 +5,8 @@ synopsis: "A coupled leaf photosynthesis–stomatal conductance–temperature mo
 description: """
 A coupled leaf photosynthesis–stomatal conductance–temperature model
 """
-maintainer: "Wu Sun <wu.sun@ucla.edu>"
-authors: "Wu Sun <wu.sun@ucla.edu>"
+maintainer: "Wu Sun <wusun@protonmail.com>"
+authors: "Wu Sun <wusun@protonmail.com>"
 license: "MIT"
 homepage: ""
 bug-reports: ""
