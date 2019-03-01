@@ -5,6 +5,8 @@
 
 (** Basic functions of chemical kinetics. *)
 
+open Leaf_pst_types
+
 (** [q10_fun q10 t_ref t] calculates the ratio of reaction rate at temperature
     [t] \[K\] to that at a reference temperature [t_ref] \[K\] from the
     {i Q}{_ 10} function defined by [q10].
@@ -92,3 +94,8 @@ val enzyme_temp_dep : float -> float -> float -> float -> float -> float
     %}
  *)
 val enzyme_temp_opt : float -> float -> float -> float
+
+(** [eval_temp_dep params t] evaluates the enzyme reaction rate at temperature
+    [t] \[K\]. The temperature dependence of the reaction is characterized by
+    [params]. *)
+val eval_temp_dep : temp_dep -> float -> float
