@@ -1,5 +1,5 @@
 (* Horner method for evaluation of polynomials *)
-(* note: prefer fold_left for tail recursion *)
+(* note: prefer fold_left for the benefit of tail recursion *)
 let polyval coefs x =
   match coefs with
   | [] -> 0.0

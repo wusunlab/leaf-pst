@@ -64,8 +64,9 @@ type photosyn_params =
   ; co2_comp: temp_dep
   ; resp: temp_dep
   ; j_max: temp_dep
-  ; v_tp: temp_dep
+  ; v_tpu: temp_dep
   ; f_abs: float
+  ; f_spec: float
   ; f_psii: float
   ; theta: float
   ; f_glyc: float
