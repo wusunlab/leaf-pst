@@ -3,9 +3,8 @@
  * License: MIT
  *)
 
-(** A collection of basic functions of chemical kinetics. *)
+(** Basic functions of chemical kinetics. *)
 
-val q10_fun : float -> float -> float -> float
 (** [q10_fun q10 t_ref t] calculates the ratio of reaction rate at temperature
     [t] \[K\] to that at a reference temperature [t_ref] \[K\] from the
     {i Q}{_ 10} function defined by [q10].
@@ -19,8 +18,8 @@ val q10_fun : float -> float -> float -> float
       \]
     %}
  *)
+val q10_fun : float -> float -> float -> float
 
-val arrhenius : float -> float -> float -> float
 (** [arrhenius e_act t_ref t] calculates the ratio of reaction rate at
     temperature [t] \[K\] to that at a reference temperature [t_ref] \[K\] from
     the Arrhenius function with an activation energy [e_act].
@@ -35,8 +34,8 @@ val arrhenius : float -> float -> float -> float
       \]
     %}
  *)
+val arrhenius : float -> float -> float -> float
 
-val enzyme_temp_dep : float -> float -> float -> float -> float -> float
 (** [enzyme_temp_dep delta_G_a delta_H_d delta_S_d t_ref t] calculates the
     ratio of reaction rate at temperature [t] \[K\] to that at a reference
     temperature [t_ref] \[K\] for an enzyme reaction with a temperature
@@ -76,8 +75,8 @@ val enzyme_temp_dep : float -> float -> float -> float -> float -> float
       temperature optima. {i J. Biol. Chem.}, 279(20), 20,717--20,722.
       {{: https://doi.org/10.1074/jbc.m309143200} \[DOI\]}
  *)
+val enzyme_temp_dep : float -> float -> float -> float -> float -> float
 
-val enzyme_temp_opt : float -> float -> float -> float
 (** [enzyme_temp_opt delta_G_a delta_H_d delta_S_d] calculates the approximate
     temperature optimum of an enzyme reaction from energetic parameters (see
     {!val: enzyme_temp_dep} for a description of them).
@@ -92,3 +91,4 @@ val enzyme_temp_opt : float -> float -> float -> float
       \]
     %}
  *)
+val enzyme_temp_opt : float -> float -> float -> float
