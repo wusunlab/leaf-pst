@@ -10,13 +10,13 @@ let test_constants () =
     ~rtol:1e-4 ;
   test_approx "Boltzmann's constant" boltzmann_constant 1.38065e-23 ~rtol:1e-4 ;
   test_approx "Avogadro's constant" avogadro_constant 6.022e23 ~rtol:1e-4 ;
-  test_approx "Molar gas constant" molar_gas 8.3145 ~rtol:1e-4 ;
-  test_approx "Standard atmosphere" std_atmosphere 101325. ;
+  test_approx "molar gas constant" molar_gas 8.3145 ~rtol:1e-4 ;
+  test_approx "standard atmosphere" std_atmosphere 101325. ;
   test_approx "Earth's gravity" grav_accel 9.806 ~rtol:1e-4 ;
-  test_approx "Zero celsius" zero_celsius 273.15 ;
+  test_approx "zero celsius" zero_celsius 273.15 ;
   test_approx "Von Kármán's constant" von_karman_constant 0.4 ;
-  test_approx "Molar mass of water" molar_mass_water 18.016e-3 ~rtol:1e-4 ;
-  test_approx "Molar mass of CO2" molar_mass_co2 44.01e-3 ~rtol:1e-4 ;
-  test_approx "Molar mass of dry air" molar_mass_dryair 28.97e-3 ~rtol:1e-3
+  test_approx "molar mass of water" molar_mass_water 18.016e-3 ~rtol:1e-4 ;
+  test_approx "molar mass of CO2" molar_mass_co2 44.01e-3 ~rtol:1e-4 ;
+  test_approx "molar mass of dry air" molar_mass_dryair 28.97e-3 ~rtol:1e-3
 
-let tests = [("Test Leaf_pst.Constants", `Quick, test_constants)]
+let tests = [("test Leaf_pst.Constants", `Quick, test_constants)]

@@ -5,7 +5,7 @@
 
 (** A collection of physical constants.
 
-    {i References}
+    {4 References}
 
     - \[MNT16a\] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
       recommended values of the fundamental physical constants: 2014. {i Rev.
