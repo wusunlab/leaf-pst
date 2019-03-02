@@ -6,8 +6,6 @@ let k2c t = t -. zero_celsius
 
 let stefan_boltzmann t = stefan_boltzmann_constant *. (t ** 4.0)
 
-let air_molar t p = p /. (molar_gas *. t)
-
 (* Goff--Gratch equation, 1946 *)
 let e_sat t =
   let u = 373.16 /. t in
@@ -38,3 +36,14 @@ let vapor_deficit t rh = e_sat t *. (1. -. rh)
 let vapor_mole_frac t p rh = e_sat t *. rh /. p
 
 let vapor_deficit_mole_frac t p rh = vapor_deficit t rh /. p
+
+let latent_heat_vap t =
+  let x = t /. (t -. 33.91) in
+  1.91846e6 *. x *. x *. molar_mass_water
+
+let air_molar t p = p /. (molar_gas *. t)
+
+let air_density t p rh =
+  let x_v = e_sat t *. rh /. p in
+  (((1. -. x_v) *. molar_mass_dryair) +. (x_v *. molar_mass_water))
+  *. air_molar t p

@@ -47,10 +47,58 @@ val ratio_gs_cos_water : float
 val ball_berry :
   assim:float -> co2:float -> rh:float -> slope:float -> g_s_min:float -> float
 
-val leuning : float -> float -> float -> float -> float -> float -> float
+(** Leuning equation of stomatal conductance.
 
+    Calculates stomatal conductance of water vapor \[mol m{^ -2} s{^ -1}\]
+    from:
+
+    - [assim]: CO{_ 2} assimilation rate \[µmol m{^ -2} s{^ -1}\].
+    - [co2]: Leaf surface CO{_ 2} mixing ratio \[µmol mol{^ -1}\].
+    - [vpd]: Leaf-to-air vapor pressure deficit \[Pa\].
+    - [vpd_0]: A parameter for vapor pressure deficit dependence \[Pa\].
+    - [slope]: Ball--Berry slope \[-\].
+    - [g_s_min]: Minimum stomatal conductance \[mol m{^ -2} s{^ -1}\].
+
+    {i Formula}
+
+    {%html:
+      \[
+        g_\mathrm{s}
+        = \max \{m \dfrac{A_\mathrm{n}}{c_\mathrm{s}}\cdot
+                 \left(1 + \dfrac{D}{D_0}\right)^{-1}, 0\}
+        + g_\mathrm{s, min}
+      \]
+    %}
+
+    {i Reference}
+
+    Leuning_1995
+ *)
+val leuning :
+     assim:float
+  -> co2:float
+  -> vpd:float
+  -> vpd_0:float
+  -> slope:float
+  -> g_s_min:float
+  -> float
+
+(** [total_cond_h2o g_bw g_sw] calculates total conductance of water vapor
+    \[mol m{^ -2} s{^ -1}\] from boundary layer conductance [g_bw]
+    \[mol m{^ -2} s{^ -1}\] and stomatal conductance [g_sw] \[mol m{^ -2}
+    s{^ -1}\]. *)
 val total_cond_h2o : float -> float -> float
 
+(** [total_cond_co2 g_bw g_sw g_m] calculates total conductance of CO{_ 2}
+    \[mol m{^ -2} s{^ -1}\] from boundary layer conductance of water vapor
+    [g_bw] \[mol m{^ -2} s{^ -1}\], stomatal conductance of water vapor [g_sw]
+    \[mol m{^ -2} s{^ -1}\], and mesophyll conductance [g_m] \[mol m{^ -2}
+    s{^ -1}\]. *)
 val total_cond_co2 : float -> float -> float -> float
 
+(** [total_cond_cos g_bw g_sw g_m] calculates total conductance of COS
+    \[mol m{^ -2} s{^ -1}\] from boundary layer conductance of water vapor
+    [g_bw] \[mol m{^ -2} s{^ -1}\], stomatal conductance of water vapor [g_sw]
+    \[mol m{^ -2} s{^ -1}\], and mesophyll conductance [g_m] \[mol m{^ -2}
+    s{^ -1}\]. *)
 val total_cond_cos : float -> float -> float -> float

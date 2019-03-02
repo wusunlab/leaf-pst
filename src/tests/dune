@@ -1,0 +1,4 @@
+(library
+ (name leaf_pst_tests)
+ (libraries alcotest leaf_pst)
+ (synopsis "Tests for leaf_pst"))

@@ -9,7 +9,7 @@ let ratio_gs_cos_water = 1.94
 let ball_berry ~assim ~co2 ~rh ~slope ~g_s_min =
   g_s_min +. max (slope *. assim *. rh /. co2) 0.0
 
-let leuning assim co2 vpd vpd_0 slope g_s_min =
+let leuning ~assim ~co2 ~vpd ~vpd_0 ~slope ~g_s_min =
   g_s_min +. max (slope *. assim /. co2 /. (1.0 +. (vpd /. vpd_0))) 0.0
 
 let total_cond_h2o g_bw g_sw = g_bw *. g_sw /. (g_bw +. g_sw)

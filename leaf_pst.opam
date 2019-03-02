@@ -6,14 +6,15 @@ description: """
 A coupled leaf photosynthesis–stomatal conductance–temperature model
 """
 maintainer: "Wu Sun <wusun@protonmail.com>"
-authors: "Wu Sun <wusun@protonmail.com>"
+authors: "Wu Sun"
 license: "MIT"
-homepage: ""
-bug-reports: ""
-dev-repo: ""
+homepage: "https://github.com/wusunlab/leaf-pst"
+bug-reports: "https://github.com/wusunlab/leaf-pst/issues"
+dev-repo: "https://github.com/wusunlab/leaf-pst.git"
 depends: [
   "ocaml" {>= "4.06"}
   "dune" {build & >= "1.5.0"}
-  "ocamlfind"
+  "alcotest" {test}
 ]
-build: ["dune" "build" "-p" name]
+build: ["dune" "build" "-p" name "-j" jobs]
+build-test: ["dune" "runtest" "-p" name]
