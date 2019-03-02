@@ -37,9 +37,7 @@ type temp_dep =
 (** Photosynthetic pathways. *)
 type photosyn_pathway = C3 | C4 | CAM
 
-(** Photosynthetic parameters. The [temp_dep] type is a set of parameters that
-    describe the baseline value and temperature dependence of an enzyme kinetic
-    parameter.
+(** Photosynthetic parameters.
 
     - [v_cmax]: Parameters for RuBisCO carboxylation.
     - [k_c]: Parameters for Michaelis constant for RuBisCO carboxylation.
@@ -49,13 +47,24 @@ type photosyn_pathway = C3 | C4 | CAM
     - [j_max]: Parameters for linear electron transport.
     - [v_tpu]: Parameters for triose phosphate utilization (TPU).
     - [f_abs]: Fraction of absorbed photosynthetically active radiation.
-    - [f_spec]: A correction factor for light spectral quality. Set to 0.0 if
+    - [f_spec]: A correction factor for light spectral quality. Set to [0.0] if
       no correction is to be applied.
     - [f_psii]: Fraction of absorbed light partitioned to the photosystem II.
     - [theta]: A curvature factor for electron transport rate.
     - [f_glyc]: Non-returned fraction of glycolate.
     - [pathway]: Photosynthetic pathway - [C3], [C4], or [CAM].
     - [enable_tpu]: Enable TPU limitation? [true] or [false].
+
+    The {!type:temp_dep} type is a set of parameters that describe the baseline
+    value and temperature dependence of an enzyme kinetic parameter, which can
+    be constructed using one of the variant tags associated with
+    {!type:temp_dep}. For example, [resp] may be constructed using the [Q10]
+    variant tag,
+
+    {[
+      # let resp = Q10 {q10 = 2.; t_ref = 298.15; v_max_ref = 1.5};;
+      val resp : temp_dep = Q10 {q10 = 2.; t_ref = 298.15; v_max_ref = 1.5}
+    ]}
  *)
 type photosyn_params =
   { v_cmax: temp_dep
