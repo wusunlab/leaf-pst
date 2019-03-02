@@ -8,10 +8,10 @@
 open Leaf_pst_types
 
 (** [q10_fun q10 t_ref t] calculates the ratio of reaction rate at temperature
-    [t] \[K\] to that at a reference temperature [t_ref] \[K\] from the
-    {i Q}{_ 10} function defined by [q10].
+    [t] \[K\] to that at a reference temperature [t_ref] \[K\] from the power
+    function defined by [q10].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -26,7 +26,7 @@ val q10_fun : float -> float -> float -> float
     temperature [t] \[K\] to that at a reference temperature [t_ref] \[K\] from
     the Arrhenius function with an activation energy [e_act].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -42,16 +42,16 @@ val arrhenius : float -> float -> float -> float
     ratio of reaction rate at temperature [t] \[K\] to that at a reference
     temperature [t_ref] \[K\] for an enzyme reaction with a temperature
     optimum. The temperature dependence of the enzyme reaction is defined by
-    the three energetic parameter:
+    three energetic parameters:
 
     - [delta_G_a]: The standard Gibbs free energy of activation of the active
       state of the enzyme \[J mol{^ -1}\].
     - [delta_H_d]: The standard enthalpy change when the enzyme switches from
-      the active to the deactivated state \[J mol{^ -1}\].
+      the active state to the deactivated state \[J mol{^ -1}\].
     - [delta_S_d]: The standard entropy change when the enzyme switches from
-      the active to the deactivated state \[J mol{^ -1} K{^ -1}\].
+      the active state to the deactivated state \[J mol{^ -1} K{^ -1}\].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -63,7 +63,7 @@ val arrhenius : float -> float -> float -> float
       \]
     %}
 
-    {i References}
+    {4 References}
 
     - Johnson, F. H., Eyring, H., and Williams, R. W. (1942). The nature of
       enzyme inhibitions in bacterial luminescence: sulfanilamide, urethane,
@@ -81,9 +81,9 @@ val enzyme_temp_dep : float -> float -> float -> float -> float -> float
 
 (** [enzyme_temp_opt delta_G_a delta_H_d delta_S_d] calculates the approximate
     temperature optimum of an enzyme reaction from energetic parameters (see
-    {!val: enzyme_temp_dep} for a description of them).
+    {!enzyme_temp_dep} for a detailed description).
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -97,5 +97,7 @@ val enzyme_temp_opt : float -> float -> float -> float
 
 (** [eval_temp_dep params t] evaluates the enzyme reaction rate at temperature
     [t] \[K\]. The temperature dependence of the reaction is characterized by
-    [params]. *)
+    [params], which can be one of the three types: [Q10], [Arrhenius], and
+    [Optimum] (see {!type:Types.temp_dep}). This function is a convenient
+    wrapper around individual temperature dependence functions. *)
 val eval_temp_dep : temp_dep -> float -> float
