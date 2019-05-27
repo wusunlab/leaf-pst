@@ -46,6 +46,7 @@ type photosyn_pathway = C3 | C4 | CAM
     - [resp]: Parameters for leaf dark respiration.
     - [j_max]: Parameters for linear electron transport.
     - [v_tpu]: Parameters for triose phosphate utilization (TPU).
+    - [g_m]: Parameters for the mesophyll conductance.
     - [f_abs]: Fraction of absorbed photosynthetically active radiation.
     - [f_spec]: A correction factor for light spectral quality. Set to [0.0] if
       no correction is to be applied.
@@ -74,6 +75,7 @@ type photosyn_params =
   ; resp: temp_dep
   ; j_max: temp_dep
   ; v_tpu: temp_dep
+  ; g_m: temp_dep
   ; f_abs: float
   ; f_spec: float
   ; f_psii: float

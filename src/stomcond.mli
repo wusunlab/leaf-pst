@@ -5,6 +5,8 @@
 
 (** Stomatal conductance functions. *)
 
+open Leaf_pst_types
+
 (** Ratio between boundary layer conductances of CO{_ 2} and H{_ 2}O. *)
 val ratio_gb_co2_water : float
 
@@ -38,7 +40,7 @@ val ratio_gs_cos_water : float
       \]
     %}
 
-    {i Reference}
+    {4 Reference}
 
     Ball_1988
 
@@ -70,7 +72,7 @@ val ball_berry :
       \]
     %}
 
-    {i Reference}
+    {4 Reference}
 
     Leuning_1995
  *)
@@ -82,6 +84,10 @@ val leuning :
   -> slope:float
   -> g_s_min:float
   -> float
+
+(** [mesophyll_cond params t_leaf] calculates mesophyll conductance
+    \[mol m{^ -2} s{^ -1}\] at a given leaf temperature [t_leaf] \[K\]. *)
+val mesophyll_cond : params:photosyn_params -> t_leaf:float -> float
 
 (** [total_cond_h2o g_bw g_sw] calculates total conductance of water vapor
     \[mol m{^ -2} s{^ -1}\] from boundary layer conductance [g_bw]

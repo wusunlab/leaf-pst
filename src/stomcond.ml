@@ -1,3 +1,6 @@
+open Leaf_pst_types
+open Chemkinet
+
 let ratio_gb_co2_water = 1.37
 
 let ratio_gs_co2_water = 1.60
@@ -11,6 +14,9 @@ let ball_berry ~assim ~co2 ~rh ~slope ~g_s_min =
 
 let leuning ~assim ~co2 ~vpd ~vpd_0 ~slope ~g_s_min =
   g_s_min +. max (slope *. assim /. co2 /. (1.0 +. (vpd /. vpd_0))) 0.0
+
+let mesophyll_cond ~(params : photosyn_params) ~t_leaf =
+  eval_temp_dep params.g_m t_leaf
 
 let total_cond_h2o g_bw g_sw = g_bw *. g_sw /. (g_bw +. g_sw)
 

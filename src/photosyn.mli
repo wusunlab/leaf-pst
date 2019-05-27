@@ -5,10 +5,16 @@
 
 (** Photosynthesis functions.
 
-    {i References}
+    {4 References}
 
-    - Farquhar et al. 1980
-    - von Caemmerer et al. 2009
+    - \[FvCB80\] Farquhar, G. D., von Caemmerer, S., and Berry, J. A. (1980). A
+      biochemical model of photosynthetic CO{_ 2} assimilation in leaves of
+      C{_ 3} species. {i Planta}, 149, 78--90.
+      {{: https://doi.org/10.1007/bf00386231} \[DOI\]}
+    - \[VCFB09\] Von Caemmerer, S., Farquhar, G., and Berry, J. (2009).
+      Biochemical model of C{_ 3} photosynthesis. In Laisk, A., Nedbal, L. and
+      Govindjee (eds.) {i Photosynthesis in silico} (pp. 209--230). Springer.
+      {{: https://doi.org/10.1007/978-1-4020-9237-4_9} \[DOI\]}
  *)
 
 open Leaf_pst_types
@@ -19,7 +25,7 @@ open Leaf_pst_types
     [ppfd] \[µmol photons m{^ -2} s{^ -1}\], and leaf temperature [t_leaf]
     \[K\].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
