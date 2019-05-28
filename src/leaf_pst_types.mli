@@ -1,3 +1,10 @@
+(* leaf_pst: A coupled photosynthesis--stomatal conductance--temperature model
+ * Copyright (c) 2019 Wu Sun <wusun@protonmail.com>
+ * License: MIT
+ *)
+
+(** Types. *)
+
 (** {i Q}{_ 10} temperature dependence parameters.
 
     - [q10]: The {i Q}{_ 10} parameter in {!Chemkinet.q10_fun}.

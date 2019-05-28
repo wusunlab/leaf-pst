@@ -43,7 +43,7 @@ open Leaf_pst_types
 val electron_transport :
   params:photosyn_params -> ppfd:float -> t_leaf:float -> float
 
-(** [assim_C3 ~params ~co2_c ~ppfd ~t_leaf ~o2 ~p] calculates the actual
+(** [assim_c3 ~params ~co2_c ~ppfd ~t_leaf ~o2 ~p] calculates the actual
     photosynthetic assimilation rate \[µmol m{^ -2} s{^ -1}\] from
     photosynthetic parameters [params] and environmental variables:
 
@@ -53,8 +53,9 @@ val electron_transport :
       \[µmol photons m{^ -2} s{^ -1}\].
     - [t_leaf]: Leaf temperature \[K\].
     - [o2]: O{_ 2} ambient concentration \[µmol mol{^ -1}\].
-    - [p]: Ambient pressure \[Pa\]. *)
-val assim_C3 :
+    - [p]: Ambient pressure \[Pa\].
+ *)
+val assim_c3 :
      params:photosyn_params
   -> co2_c:float
   -> ppfd:float

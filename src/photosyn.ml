@@ -11,7 +11,7 @@ let electron_transport ~(params : photosyn_params) ~ppfd ~t_leaf =
   (x -. sqrt ((x *. x) -. (4. *. params.theta *. i_psii *. j_max)))
   /. (2. *. params.theta)
 
-let assim_C3 ~(params : photosyn_params) ~co2_c ~ppfd ~t_leaf ~o2 ~p =
+let assim_c3 ~(params : photosyn_params) ~co2_c ~ppfd ~t_leaf ~o2 ~p =
   (* evaluate biochemical parameters at the current leaf temperature *)
   (* note: pressure correction is needed for Michaelis constants because they
      must be converted to equivalent mixing ratios: [mol L^-1] -> [Pa] -> [µmol

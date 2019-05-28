@@ -55,7 +55,10 @@ val vapor_deficit_mole_frac : float -> float -> float -> float
 
     {4 References}
 
-    - Henderson-Sellers-1984
+    - \[H84\] Henderson-Sellers, B. (1984). A new formula for latent heat of
+      vaporization of water as a function of temperature. {i Quart. J. Roy.
+      Meteorol. Soc.}, 110(466), 1186--1190.
+      {{: https://doi.org/10.1002/qj.49711046626} \[DOI\]}
  *)
 val latent_heat_vap : float -> float
 

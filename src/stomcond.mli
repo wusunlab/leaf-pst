@@ -30,7 +30,7 @@ val ratio_gs_cos_water : float
     - [slope]: Ball--Berry slope \[-\].
     - [g_s_min]: Minimum stomatal conductance \[mol m{^ -2} s{^ -1}\].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -40,11 +40,16 @@ val ratio_gs_cos_water : float
       \]
     %}
 
-    {4 Reference}
+    {4 References}
 
-    Ball_1988
-
-    Collatz_1991
+    - \[B88\] Ball, J. T. (1988). {i An analysis of stomatal conductance}. PhD
+      thesis, Stanford University, Stanford, CA, USA.
+      {{: https://www-legacy.dge.carnegiescience.edu/publications/berry/AnnRev2012/1988%20Ball.pdf} \[link\]}
+    - \[CBGB91\] Collatz, G. J., Ball, J. T., Grivet, C., and Berry, J. A.
+      (1991). Physiological and environmental regulation of stomatal
+      conductance, photosynthesis and transpiration: a model that includes a
+      laminar boundary layer. {i Agric. Forest Meteorol.}, 54, 107--136.
+      {{: https://doi.org/10.1016/0168-1923(91)90002-8} \[DOI\]}
  *)
 val ball_berry :
   assim:float -> co2:float -> rh:float -> slope:float -> g_s_min:float -> float
@@ -61,7 +66,7 @@ val ball_berry :
     - [slope]: Ball--Berry slope \[-\].
     - [g_s_min]: Minimum stomatal conductance \[mol m{^ -2} s{^ -1}\].
 
-    {i Formula}
+    {4 Formula}
 
     {%html:
       \[
@@ -72,9 +77,12 @@ val ball_berry :
       \]
     %}
 
-    {4 Reference}
+    {4 References}
 
-    Leuning_1995
+    - \[L95\] Leuning, R. (1995). A critical appraisal of a combined
+      stomatal--photosynthesis model for C{_ 3} plants. {i Plant Cell
+      Environ.}, 18, 339--355.
+      {{: https://doi.org/10.1111/j.1365-3040.1995.tb00370.x} \[DOI\]}
  *)
 val leuning :
      assim:float
@@ -86,7 +94,16 @@ val leuning :
   -> float
 
 (** [mesophyll_cond params t_leaf] calculates mesophyll conductance
-    \[mol m{^ -2} s{^ -1}\] at a given leaf temperature [t_leaf] \[K\]. *)
+    \[mol m{^ -2} s{^ -1}\] at a given leaf temperature [t_leaf] \[K\].
+
+    {4 References}
+
+    - [BPN02] Bernacchi, C. J., Portis, A. R., Nakano, H., von Caemmerer, S.,
+      and Long, S. P. (2002). Temperature response of mesophyll conductance.
+      Implications for the determination of Rubisco enzyme kinetics and for
+      limitations to photosynthesis in vivo. *Plant Physiol.*, 130(4),
+      1992--1998. {{: https://doi.org/10.1104/pp.008250} \[DOI\]}
+ *)
 val mesophyll_cond : params:photosyn_params -> t_leaf:float -> float
 
 (** [total_cond_h2o g_bw g_sw] calculates total conductance of water vapor

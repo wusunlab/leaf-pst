@@ -15,7 +15,7 @@
       recommended values of the fundamental physical constants: 2014. {i J.
       Phys. Chem. Ref. Data}, 45, 043102, 1--74.
       {{: https://doi.org/10.1063/1.4954402} \[DOI\]}
-*)
+ *)
 
 (** Speed of light in the vacuum \[m s{^ -1}\]. *)
 val speed_of_light : float
