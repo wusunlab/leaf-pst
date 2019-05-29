@@ -6,3 +6,4 @@ module Chemkinet = Chemkinet
 module Transfercoefs = Transfercoefs
 module Stomcond = Stomcond
 module Photosyn = Photosyn
+module Ebal = Ebal
