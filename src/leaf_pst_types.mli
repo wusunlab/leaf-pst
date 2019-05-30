@@ -90,3 +90,22 @@ type photosyn_params =
   ; f_glyc: float
   ; pathway: photosyn_pathway
   ; enable_tpu: bool }
+
+type stom_cond_bb = {slope: float; g_s_min: float}
+
+type stom_cond_leuning = {slope: float; vpd_0: float; g_s_min: float}
+
+type stom_cond_params =
+  | Ball_Berry of stom_cond_bb
+  | Leuning of stom_cond_leuning
+
+type solver_results =
+  { assim: float
+  ; g_sw: float
+  ; g_bw: float
+  ; t_leaf: float
+  ; success: bool
+  ; delta_e: float
+  ; delta_assim: float }
+
+exception Not_implemented
