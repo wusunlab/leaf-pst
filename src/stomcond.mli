@@ -35,9 +35,13 @@ val ratio_gs_cos_water : float
     {%html:
       \[
         g_\mathrm{s}
-        = \max \{m \dfrac{A_\mathrm{n} h_\mathrm{s}}{c_\mathrm{s}}, 0\}
-        + g_\mathrm{s, min}
+        = \max \{m \dfrac{A_\mathrm{n} h_\mathrm{s}}{\chi_\mathrm{s, CO_2}} +
+                 g_\mathrm{s, min},\ g_\mathrm{s, min}\}
       \]
+      where $A_\mathrm{n}$ is the CO<sub>2</sub> assimilation rate,
+      $h_\mathrm{s}$ is the leaf surface relative humidity,
+      $\chi_\mathrm{s, CO_2}$ is the leaf surface CO<sub>2</sub> mixing ratio,
+      and $g_\mathrm{s, min}$ is the minimum stomatal conductance.
     %}
 
     {4 References}
@@ -71,10 +75,15 @@ val ball_berry :
     {%html:
       \[
         g_\mathrm{s}
-        = \max \{m \dfrac{A_\mathrm{n}}{c_\mathrm{s}}\cdot
-                 \left(1 + \dfrac{D}{D_0}\right)^{-1}, 0\}
-        + g_\mathrm{s, min}
+        = \max \{m \dfrac{A_\mathrm{n}}{\chi_\mathrm{s, CO_2}}\cdot
+                 \left(1 + \dfrac{D}{D_0}\right)^{-1} +
+                 g_\mathrm{s, min},\ g_\mathrm{s, min}\}
       \]
+      where $A_\mathrm{n}$ is the CO<sub>2</sub> assimilation rate,
+      $D$ is the leaf-to-air vapor pressure deficit,
+      $D_0$ is a parameter for vapor pressure deficit dependence,
+      $\chi_\mathrm{s, CO_2}$ is the leaf surface CO<sub>2</sub> mixing ratio,
+      and $g_\mathrm{s, min}$ is the minimum stomatal conductance.
     %}
 
     {4 References}
@@ -95,16 +104,19 @@ val leuning :
 
 (** [mesophyll_cond params t_leaf] calculates mesophyll conductance
     \[mol m{^ -2} s{^ -1}\] at a given leaf temperature [t_leaf] \[K\].
+    [params] defines the baseline value and the temperature dependence of
+    mesophyll conductance, which can be one of the three types: [Q10],
+    [Arrhenius], and [Optimum] (see {!type:Types.temp_dep}).
 
     {4 References}
 
-    - [BPN02] Bernacchi, C. J., Portis, A. R., Nakano, H., von Caemmerer, S.,
+    - \[BPN02\] Bernacchi, C. J., Portis, A. R., Nakano, H., von Caemmerer, S.,
       and Long, S. P. (2002). Temperature response of mesophyll conductance.
       Implications for the determination of Rubisco enzyme kinetics and for
-      limitations to photosynthesis in vivo. *Plant Physiol.*, 130(4),
+      limitations to photosynthesis in vivo. {i Plant Physiol.}, 130(4),
       1992--1998. {{: https://doi.org/10.1104/pp.008250} \[DOI\]}
  *)
-val mesophyll_cond : params:photosyn_params -> t_leaf:float -> float
+val mesophyll_cond : params:temp_dep -> t_leaf:float -> float
 
 (** [total_cond_h2o g_bw g_sw] calculates total conductance of water vapor
     \[mol m{^ -2} s{^ -1}\] from boundary layer conductance [g_bw]
