@@ -99,13 +99,26 @@ type stom_cond_params =
   | Ball_Berry of stom_cond_bb
   | Leuning of stom_cond_leuning
 
+type leaf_env =
+  { t_air: float
+  ; p: float
+  ; rh: float
+  ; ppfd: float
+  ; co2: float
+  ; wind_speed: float
+  ; d_leaf: float
+  ; em_leaf: float }
+
+type solver_options =
+  {dt: float; dc: float; max_iter: int; tol: float; eps: float}
+
 type solver_results =
-  { assim: float
-  ; g_sw: float
-  ; g_bw: float
-  ; t_leaf: float
+  { assim: float option
+  ; g_sw: float option
+  ; g_bw: float option
+  ; t_leaf: float option
   ; success: bool
-  ; delta_e: float
-  ; delta_assim: float }
+  ; delta_e: float option
+  ; delta_assim: float option }
 
 exception Not_implemented
