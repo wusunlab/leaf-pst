@@ -7,17 +7,17 @@
 
 open Leaf_pst_types
 
-(** Ratio between boundary layer conductances of CO{_ 2} and H{_ 2}O. *)
-val ratio_gb_co2_water : float
+(** Ratio between boundary layer conductances of H{_ 2}O and CO{_ 2}. *)
+val ratio_gb_co2 : float
 
-(** Ratio between stomatal conductances of CO{_ 2} and H{_ 2}O. *)
-val ratio_gs_co2_water : float
+(** Ratio between stomatal conductances of H{_ 2}O and CO{_ 2}. *)
+val ratio_gs_co2 : float
 
-(** Ratio between boundary layer conductances of COS and H{_ 2}O. *)
-val ratio_gb_cos_water : float
+(** Ratio between boundary layer conductances of H{_ 2}O and COS. *)
+val ratio_gb_cos : float
 
-(** Ratio between stomatal conductances of COS and H{_ 2}O. *)
-val ratio_gs_cos_water : float
+(** Ratio between stomatal conductances of H{_ 2}O and COS. *)
+val ratio_gs_cos : float
 
 (** Ball--Berry equation of stomatal conductance.
 
@@ -35,13 +35,16 @@ val ratio_gs_cos_water : float
     {%html:
       \[
         g_\mathrm{s}
-        = \max \{m \dfrac{A_\mathrm{n} h_\mathrm{s}}{\chi_\mathrm{s, CO_2}} +
-                 g_\mathrm{s, min},\ g_\mathrm{s, min}\}
+        = \max\left\{
+          m \dfrac{A_\mathrm{n} h_\mathrm{s}}{\chi_\mathrm{s, CO_2}} +
+          g_\mathrm{s, min},\ g_\mathrm{s, min}\right\}
       \]
-      where $A_\mathrm{n}$ is the CO<sub>2</sub> assimilation rate,
-      $h_\mathrm{s}$ is the leaf surface relative humidity,
-      $\chi_\mathrm{s, CO_2}$ is the leaf surface CO<sub>2</sub> mixing ratio,
-      and $g_\mathrm{s, min}$ is the minimum stomatal conductance.
+      where $A_\mathrm{n}$ [µmol m<sup>-2</sup> s<sup>-1</sup>] is the net
+      CO<sub>2</sub> assimilation rate, $\chi_\mathrm{s, CO_2}$
+      [µmol mol<sup>-1</sup>] is the leaf surface CO<sub>2</sub> mixing ratio,
+      $h_\mathrm{s}$ (dimensionless) is the leaf surface relative humidity, $m$
+      is the dimensionless Ball--Berry slope, and $g_\mathrm{s, min}$
+      [mol m<sup>-2</sup> s<sup>-1</sup>] is the minimum stomatal conductance.
     %}
 
     {4 References}
@@ -67,7 +70,7 @@ val ball_berry :
     - [co2]: Leaf surface CO{_ 2} mixing ratio \[µmol mol{^ -1}\].
     - [vpd]: Leaf-to-air vapor pressure deficit \[Pa\].
     - [vpd_0]: A parameter for vapor pressure deficit dependence \[Pa\].
-    - [slope]: Ball--Berry slope \[-\].
+    - [slope]: A slope parameter \[-\].
     - [g_s_min]: Minimum stomatal conductance \[mol m{^ -2} s{^ -1}\].
 
     {4 Formula}
@@ -75,15 +78,18 @@ val ball_berry :
     {%html:
       \[
         g_\mathrm{s}
-        = \max \{m \dfrac{A_\mathrm{n}}{\chi_\mathrm{s, CO_2}}\cdot
-                 \left(1 + \dfrac{D}{D_0}\right)^{-1} +
-                 g_\mathrm{s, min},\ g_\mathrm{s, min}\}
+        = \max\left\{
+          m \dfrac{A_\mathrm{n}}{\chi_\mathrm{s, CO_2}}\cdot
+          \left(1 + \dfrac{D}{D_0}\right)^{-1} +
+          g_\mathrm{s, min},\ g_\mathrm{s, min}\right\}
       \]
-      where $A_\mathrm{n}$ is the CO<sub>2</sub> assimilation rate,
-      $D$ is the leaf-to-air vapor pressure deficit,
-      $D_0$ is a parameter for vapor pressure deficit dependence,
-      $\chi_\mathrm{s, CO_2}$ is the leaf surface CO<sub>2</sub> mixing ratio,
-      and $g_\mathrm{s, min}$ is the minimum stomatal conductance.
+      where $A_\mathrm{n}$ [µmol m<sup>-2</sup> s<sup>-1</sup>] is the net
+      CO<sub>2</sub> assimilation rate, $\chi_\mathrm{s, CO_2}$
+      [µmol mol<sup>-1</sup>] is the leaf surface CO<sub>2</sub> mixing ratio,
+      $D$ [Pa] is the leaf-to-air vapor pressure deficit,
+      $D_0$ [Pa] is a parameter for vapor pressure deficit dependence,
+      $m$ is a dimensionless slope parameter, and $g_\mathrm{s, min}$
+      [mol m<sup>-2</sup> s<sup>-1</sup>] is the minimum stomatal conductance.
     %}
 
     {4 References}
@@ -98,6 +104,56 @@ val leuning :
   -> co2:float
   -> vpd:float
   -> vpd_0:float
+  -> slope:float
+  -> g_s_min:float
+  -> float
+
+(** Medlyn equation of stomatal conductance.
+
+    Calculates stomatal conductance of water vapor \[mol m{^ -2} s{^ -1}\]
+    from:
+
+    - [assim]: CO{_ 2} assimilation rate \[µmol m{^ -2} s{^ -1}\].
+    - [co2]: Leaf surface CO{_ 2} mixing ratio \[µmol mol{^ -1}\].
+    - [vpd]: Leaf-to-air vapor pressure deficit \[Pa\].
+    - [slope]: A slope parameter \[Pa{^ 1/2}\].
+    - [g_s_min]: Minimum stomatal conductance \[mol m{^ -2} s{^ -1}\].
+
+    Compared with Ball--Berry and Leuning equations, the Medlyn equation is
+    more consistent with the optimality-based theory of stomatal conductance.
+
+    {4 Formula}
+
+    {%html:
+      \[
+        g_\mathrm{s}
+        = \max\left\{
+          R_\mathrm{W-S}\left(1 + \dfrac{m}{\sqrt{D}}\right)
+          \dfrac{A_\mathrm{n}}{\chi_\mathrm{s, CO_2}} +
+          g_\mathrm{s, min},\ g_\mathrm{s, min}\right\}
+      \]
+      where $R_\mathrm{W-S} = 1.6$ is the ratio of diffusivities of water and
+      CO<sub>2</sub>, $A_\mathrm{n}$ [µmol m<sup>-2</sup> s<sup>-1</sup>] is
+      the net CO<sub>2</sub> assimilation rate, $\chi_\mathrm{s, CO_2}$
+      [µmol mol<sup>-1</sup>] is the leaf surface CO<sub>2</sub> mixing ratio,
+      $D$ [Pa] is the leaf-to-air vapor pressure deficit, $m$
+      [Pa<sup>1/2</sup>] is a slope parameter, and $g_\mathrm{s, min}$
+      [mol m<sup>-2</sup> s<sup>-1</sup>] is the minimum stomatal conductance.
+    %}
+
+    {4 References}
+
+    - \[MDE11\] Medlyn, B. E., Duursma, R. A., Eamus, D., Ellsworth, D. S.,
+      Prentice, I. C., Barton, C. V. M., Crous, K. Y., De Angelis, P., Freeman,
+      M., and Wingate, L. (2011). Reconciling the optimal and empirical
+      approaches to modelling stomatal conductance: {i Glob. Change Biol.},
+      17(6), 2134--2144.
+      {{: https://doi.org/10.1111/j.1365-2486.2010.02375.x} \[DOI\]}
+ *)
+val medlyn :
+     assim:float
+  -> co2:float
+  -> vpd:float
   -> slope:float
   -> g_s_min:float
   -> float
