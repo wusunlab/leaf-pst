@@ -13,6 +13,7 @@ bug-reports: "https://github.com/wusunlab/leaf-pst/issues"
 dev-repo: "https://github.com/wusunlab/leaf-pst.git"
 depends: [
   "ocaml" {>= "4.06"}
+  "owl" {>= "0.4.0"}
   "dune" {build & >= "1.5.0"}
   "alcotest" {test}
 ]

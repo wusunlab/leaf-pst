@@ -95,15 +95,19 @@ type stom_cond_bb = {slope: float; g_s_min: float}
 
 type stom_cond_leuning = {slope: float; vpd_0: float; g_s_min: float}
 
+type stom_cond_medlyn = {slope: float; g_s_min: float}
+
 type stom_cond_params =
   | Ball_Berry of stom_cond_bb
   | Leuning of stom_cond_leuning
+  | Medlyn of stom_cond_medlyn
 
 type leaf_env =
   { t_air: float
   ; p: float
   ; rh: float
   ; ppfd: float
+  ; o2: float
   ; co2: float
   ; wind_speed: float
   ; d_leaf: float

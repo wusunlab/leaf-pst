@@ -1,6 +1,7 @@
 (library
  (name leaf_pst)
  (public_name leaf_pst)
+ (libraries owl)
  (modules_without_implementation leaf_pst_types))
 
 (documentation)
