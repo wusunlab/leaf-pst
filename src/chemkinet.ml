@@ -8,13 +8,12 @@ let arrhenius e_act t_ref t =
   exp (e_act *. (t -. t_ref) /. (molar_gas *. t_ref *. t))
 
 let enzyme_temp_dep delta_G_a delta_H_d delta_S_d t_ref t =
-  let f_enzyme_temp_dep delta_G_a delta_H_d delta_S_d t =
+  let f delta_G_a delta_H_d delta_S_d t =
     t
     *. exp (-.delta_G_a /. (molar_gas *. t))
     /. (1.0 +. exp ((delta_S_d -. (delta_H_d /. t)) /. molar_gas))
   in
-  f_enzyme_temp_dep delta_G_a delta_H_d delta_S_d t
-  /. f_enzyme_temp_dep delta_G_a delta_H_d delta_S_d t_ref
+  f delta_G_a delta_H_d delta_S_d t /. f delta_G_a delta_H_d delta_S_d t_ref
 
 let enzyme_temp_opt delta_G_a delta_H_d delta_S_d =
   let t_eq = delta_H_d /. delta_S_d in

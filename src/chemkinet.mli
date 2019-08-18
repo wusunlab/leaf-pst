@@ -98,6 +98,6 @@ val enzyme_temp_opt : float -> float -> float -> float
 (** [eval_temp_dep params t] evaluates the enzyme reaction rate at temperature
     [t] \[K\]. The temperature dependence of the reaction is characterized by
     [params], which can be one of the three types: [Q10], [Arrhenius], and
-    [Optimum] (see {!type:Types.temp_dep}). This function is a convenient
-    wrapper around individual temperature dependence functions. *)
+    [Optimum] (see {!type:Types.temp_dep}). This function is a unified
+    interface to different temperature dependence functions. *)
 val eval_temp_dep : temp_dep -> float -> float

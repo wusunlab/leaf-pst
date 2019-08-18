@@ -46,6 +46,11 @@ val dyn_visc_vapor : float -> float
     relative humidity [rh] \[0--1\]. *)
 val dyn_visc_moistair : float -> float -> float -> float
 
+(** [kin_visc_moistair t p rh] calculates the kinematic viscosity of moist air
+    \[m{^ 2} s{^ -1}\] from temperature [t] \[K\], pressure [p] \[Pa\], and
+    relative humidity [rh] \[0--1\]. *)
+val kin_visc_moistair : float -> float -> float -> float
+
 (** {2 Heat} *)
 
 (** [therm_cond_dryair t] calculates the thermal conductivity of dry air

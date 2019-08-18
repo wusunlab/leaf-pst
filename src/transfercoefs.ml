@@ -31,9 +31,12 @@ let viscosity_interaction_terms t =
 
 let dyn_visc_moistair t p rh =
   let x_w = vapor_mole_frac t p rh in
+  let x_d = 1. -. x_w in
   let phi_dw, phi_wd, mu_d, mu_w = viscosity_interaction_terms t in
-  ((1. -. x_w) *. mu_d /. (1. -. x_w +. (x_w *. phi_dw)))
-  +. (x_w *. mu_w /. (x_w +. ((1. -. x_w) *. phi_wd)))
+  (x_d *. mu_d /. (x_d +. (x_w *. phi_dw)))
+  +. (x_w *. mu_w /. (x_w +. (x_d *. phi_wd)))
+
+let kin_visc_moistair t p rh = dyn_visc_moistair t p rh /. air_density t p rh
 
 let therm_cond_dryair t =
   polyval
@@ -51,19 +54,20 @@ let heat_cap_dryair t =
 
 let therm_cond_vapor t =
   (* note: the empirical equation takes Celsius values *)
-  polyval [1.761758242e-2; 5.558941059e-5; 1.663336663e-7] (t -. zero_celsius)
+  polyval [1.761758242e-2; 5.558941059e-5; 1.663336663e-7] (k2c t)
 
 let heat_cap_vapor t =
-  polyval [1.86910989e3; -2.578421578e-1; 1.941058941e-2] (t -. zero_celsius)
+  polyval [1.86910989e3; -2.578421578e-1; 1.941058941e-2] (k2c t)
   *. molar_mass_water
 
 let therm_cond_moistair t p rh =
   let x_w = vapor_mole_frac t p rh in
+  let x_d = 1. -. x_w in
   let kappa_d = therm_cond_dryair t in
   let kappa_w = therm_cond_vapor t in
   let phi_dw, phi_wd, _, _ = viscosity_interaction_terms t in
-  ((1. -. x_w) *. kappa_d /. (1. -. x_w +. (x_w *. phi_dw)))
-  +. (x_w *. kappa_w /. (x_w +. ((1. -. x_w) *. phi_wd)))
+  (x_d *. kappa_d /. (x_d +. (x_w *. phi_dw)))
+  +. (x_w *. kappa_w /. (x_w +. (x_d *. phi_wd)))
 
 let heat_cap_moistair t p rh =
   let x_w = vapor_mole_frac t p rh in
@@ -73,10 +77,11 @@ let heat_cap_moistair t p rh =
 
 let heat_cap_mass_moistair t p rh =
   let x_w = vapor_mole_frac t p rh in
+  let x_d = 1. -. x_w in
   let cp_d = heat_cap_dryair t in
   let cp_w = heat_cap_vapor t in
-  (((1. -. x_w) *. cp_d) +. (x_w *. cp_w))
-  /. (((1. -. x_w) *. molar_mass_dryair) +. (x_w *. molar_mass_water))
+  ((x_d *. cp_d) +. (x_w *. cp_w))
+  /. ((x_d *. molar_mass_dryair) +. (x_w *. molar_mass_water))
 
 let therm_diff_moistair t p rh =
   let rho_a = air_density t p rh in

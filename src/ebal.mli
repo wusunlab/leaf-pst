@@ -27,7 +27,7 @@
     - [p]: Ambient pressure \[Pa\].
     - [rh]: Relative humidity \[0--1\].
     - [wind_speed]: Wind speed \[m s{^ -1}\].
-    - [d_leaf]: Characteristic length for leaf size \[m\].
+    - [d_leaf]: Characteristic length of leaf size \[m\].
 
     {4 Formula}
 
@@ -198,8 +198,12 @@ val latent_heat :
 
     {%html:
       \[
-        \Delta E = R_\mathrm{sw} - \mathrm{SH} - \mathrm{LE}
+        \Delta E = R_\mathrm{net} - \mathrm{SH} - \mathrm{LE}
       \]
+      where $R_\mathrm{net}$ [W m<sup>-2</sup>] is the net balance of
+      radiation, $\mathrm{SH}$ [W m<sup>-2</sup>] is the sensible heat flux
+      density, and $\mathrm{LE}$ [W m<sup>-2</sup>] is the latent heat flux
+      density.
     %}
 
     {4 Note}

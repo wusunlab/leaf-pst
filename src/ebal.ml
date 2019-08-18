@@ -3,10 +3,14 @@ open Transfercoefs
 open Stomcond
 
 let bl_cond_heat ~t_air ~p ~rh ~wind_speed ~d_leaf =
-  let nu_a = dyn_visc_moistair t_air p rh /. air_density t_air p rh in
+  let nu_a = kin_visc_moistair t_air p rh in
   (* nu_a: kinematic viscosity of moist air [m^2 s^-1] *)
   let pr = prandtl t_air p rh in
   let air_conc = air_molar t_air p in
+  (* empirical factors:
+   * - 1.4 is an empirical factor for field conditions
+   * - 0.664 is an empirical factor for Nusselt number of laminar flow over a
+   *   flat plate *)
   1.4 *. 0.664
   *. (pr ** (1. /. 3.))
   *. air_conc
@@ -14,8 +18,7 @@ let bl_cond_heat ~t_air ~p ~rh ~wind_speed ~d_leaf =
   *. sqrt (wind_speed /. (d_leaf *. nu_a))
 
 let bl_cond_vapor ~t_air ~p ~rh ~wind_speed ~d_leaf =
-  let nu_a = dyn_visc_moistair t_air p rh /. air_density t_air p rh in
-  (* nu_a: kinematic viscosity of moist air [m^2 s^-1] *)
+  let nu_a = kin_visc_moistair t_air p rh in
   let d_w = diffus_vapor t_air p in
   let sc = nu_a /. d_w in
   (* sc: Schmidt number *)
@@ -37,7 +40,7 @@ let water_flux ~vpd_leaf ~p ~g_bw ~g_sw =
   total_cond_h2o g_bw g_sw *. vpd_leaf /. p
 
 let latent_heat ~t_leaf ~vpd_leaf ~p ~g_bw ~g_sw =
-  water_flux ~vpd_leaf ~p ~g_bw ~g_sw /. latent_heat_vap t_leaf
+  water_flux ~vpd_leaf ~p ~g_bw ~g_sw *. latent_heat_vap t_leaf
 
 let energy_imbalance ~t_leaf ~t_air ~p ~rh ~rad_sw ~wind_speed ~d_leaf ~em_leaf
     ~g_sw =
