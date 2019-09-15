@@ -1,18 +1,18 @@
 let speed_of_light = 2.997_924_58e8
 
-let planck_constant = 6.626_070_040e-34
+let planck_constant = 6.626_070_15e-34
 
-let stefan_boltzmann_constant = 5.670_367e-8
+let stefan_boltzmann_constant = 5.670_374_419e-8
 
-let boltzmann_constant = 1.380_648_52e-23
+let boltzmann_constant = 1.380_649e-23
 
-let avogadro_constant = 6.022_140_857e23
+let avogadro_constant = 6.022_140_76e23
 
-let molar_gas = 8.314_4598
+let molar_gas = 8.314_462_618
 
 let std_atmosphere = 1.013_25e5
 
-let grav_accel = 9.806_65e0
+let grav_accel = 9.806_65
 
 let zero_celsius = 273.15
 

@@ -1,5 +1,37 @@
+# OCaml.gitignore
+# ---------------
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# ocamlbuild working directory
+_build/
+
+# ocamlbuild targets
+*.byte
+*.native
+
+# oasis generated files
+setup.data
+setup.log
+
+# Merlin configuring file for Vim and Emacs
+.merlin
+
+# Dune generated files
+*.install
+
+# Local OPAM switch
+_opam/
+
 # macOS.gitignore
-# ===============
+# ---------------
 # General
 .DS_Store
 .AppleDouble
@@ -28,34 +60,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# OCaml.gitignore
-# ===============
-*.annot
-*.cmo
-*.cma
-*.cmi
-*.a
-*.o
-*.cmx
-*.cmxs
-*.cmxa
-
-# ocamlbuild working directory
-_build/
-
-# ocamlbuild targets
-*.byte
-*.native
-
-# oasis generated files
-setup.data
-setup.log
-
-# Merlin configuring file for Vim and Emacs
-.merlin
-
 # VisualStudioCode.gitignore
-# ==========================
+# --------------------------
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
