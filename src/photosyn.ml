@@ -4,7 +4,7 @@ open Chemkinet
 
 let electron_transport ~(params : photosyn_params) ~ppfd ~t_leaf =
   let i_psii =
-    ppfd *. params.f_abs *. (1. -. params.f_spec) *. params.f_psii
+    ppfd *. params.f_apar *. (1. -. params.f_spec) *. params.f_psii
   in
   let j_max = eval_temp_dep params.j_max t_leaf in
   let x = i_psii +. j_max in

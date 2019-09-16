@@ -59,7 +59,7 @@ val zero_celsius : float
 (** Von Karman's constant, $\kappa$ \[-\]. *)
 val von_karman_constant : float
 
-(** Molar mass of water, $M_\mathrm\{H_2O\}$\[kg mol{^ -1}\]. *)
+(** Molar mass of water, $M_\mathrm\{H_2O\}$ \[kg mol{^ -1}\]. *)
 val molar_mass_water : float
 
 (** Molar mass of CO{_ 2}, $M_\mathrm\{CO_2\}$ \[kg mol{^ -1}\]. *)

@@ -29,7 +29,15 @@ val stefan_boltzmann : float -> float
 (** {2 Water} *)
 
 (** [e_sat t] calculates saturation vapor pressure \[Pa\] of liquid water at
-    temperature [t] \[K\]. *)
+    temperature [t] \[K\].
+
+    {4 References}
+
+    - \[H98\] Hardy, B. (1998). ITS-90 formulations for vapor pressure,
+      frostpoint temperature, dewpoint temperature, and enhancement factors in
+      the range –100 to +100 °C. {i The Proceedings of the Third International
+      Symposium on Humidity & Moisture}, London, England.
+    *)
 val e_sat : float -> float
 
 (** [e_sat_deriv t] calculates the temperature derivative of saturation vapor

@@ -1,33 +1,45 @@
 open Constants
+open Math_helpers
 
 let c2k = ( +. ) zero_celsius
 
 let k2c t = t -. zero_celsius
 
-let stefan_boltzmann t = stefan_boltzmann_constant *. (t ** 4.0)
+let stefan_boltzmann t =
+  let t2 = t *. t in
+  stefan_boltzmann_constant *. t2 *. t2
 
-(* Goff--Gratch equation, 1946 *)
+(* Hardy 1998 equation *)
 let e_sat t =
-  let u = 373.16 /. t in
-  let v = t /. 373.16 in
-  let log10_esat =
-    (-7.90298 *. (u -. 1.))
-    +. (5.02808 *. log10 u)
-    -. (1.3816e-7 *. ((10. ** (11.344 *. (1. -. v))) -. 1.))
-    +. (8.1328e-3 *. ((10. ** (-3.49149 *. (u -. 1.))) -. 1.))
-    +. log10 1013.246 +. 2.
-    (* add 2 to convert from hPa to Pa *)
+  let t2 = t *. t in
+  let log_esat =
+    polyval
+      [ -2.836_574_4e3
+      ; -6.028_076_559e3
+      ; 1.954_263_612e1
+      ; -2.737_830_188e-2
+      ; 1.626_169_8e-5
+      ; 7.022_905_6e-10
+      ; -1.868_000_9e-13 ]
+      t
+    /. t2
+    +. (2.715_030_5 *. log t)
   in
-  10. ** log10_esat
+  exp log_esat
 
-(* from Goff--Gratch equation, 1946 *)
 let e_sat_deriv t =
+  let t3 = t *. t *. t in
   let log_e_sat_deriv =
-    ( 6790.4984743899386
-    +. exp (12.068003566856145 -. (3000.0022166762069 /. t)) )
-    /. (t *. t)
-    -. (5.02808 /. t)
-    +. exp (8.5004184700093912 -. (0.069998191914793798 *. t))
+    polyval
+      [ 5.673_148_8e3
+      ; 6.028_076_559e3
+      ; 2.715_030_5
+      ; -2.737_830_188e-2
+      ; 3.252_339_6e-5
+      ; 2.106_871_68e-9
+      ; -7.4720036e-13 ]
+      t
+    /. t3
   in
   e_sat t *. log_e_sat_deriv
 
