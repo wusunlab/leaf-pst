@@ -19,6 +19,15 @@ let medlyn ~assim ~co2 ~vpd ~slope ~g_s_min =
   g_s_min
   +. max (ratio_gs_co2 *. (1. +. (slope /. sqrt vpd)) *. assim /. co2) 0.0
 
+let stom_cond (params : stom_cond_params) ~assim ~co2 ~h =
+  match params with
+  | Ball_Berry {slope; g_s_min} ->
+      ball_berry ~assim ~co2 ~rh:h ~slope ~g_s_min
+  | Leuning {slope; vpd_0; g_s_min} ->
+      leuning ~assim ~co2 ~vpd:h ~vpd_0 ~slope ~g_s_min
+  | Medlyn {slope; g_s_min} ->
+      medlyn ~assim ~co2 ~vpd:h ~slope ~g_s_min
+
 let mesophyll_cond ~(params : temp_dep) ~t_leaf = eval_temp_dep params t_leaf
 
 let total_cond_h2o g_bw g_sw = g_bw *. g_sw /. (g_bw +. g_sw)

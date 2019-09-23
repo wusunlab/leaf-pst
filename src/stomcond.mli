@@ -158,6 +158,18 @@ val medlyn :
   -> g_s_min:float
   -> float
 
+(** [stom_cond params assim co2 h] is a generic function to calculate stomatal
+    conductance \[mol m{^ -2} s{^ -1}\] at a given carbon assimilation rate
+    [assim], leaf surface CO{_ 2} mixing ratio [co2] \[mol mol{^ -1}\], and
+    leaf boundary layer humidity [h] characterized by either relative humidity
+    \[0--1\] or vapor pressure deficit \[Pa\], depending on the stomatal
+    conductance function being used. The stomatal conductance parameters can be
+    one of the three variants: [Ball_Berry], [Leuning], and [Medlyn] (see
+    {!type:Types.stom_cond_params}).
+ *)
+val stom_cond :
+  params:stom_cond_params -> assim:float -> co2:float -> h:float -> float
+
 (** [mesophyll_cond params t_leaf] calculates mesophyll conductance
     \[mol m{^ -2} s{^ -1}\] at a given leaf temperature [t_leaf] \[K\].
     [params] defines the baseline value and the temperature dependence of
